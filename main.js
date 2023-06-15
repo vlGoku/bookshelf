@@ -12,6 +12,7 @@ const pages = document.querySelector("#pages");
 const genre = document.querySelector("#genre");
 const price = document.querySelector("#price");
 const read_status = document.querySelector("#read_status");
+const container = document.querySelector(".container");
 
 function addBook() {
   plus.addEventListener("click", () => {
@@ -72,19 +73,20 @@ function clearForm() {
 }
 
 function addBookToOverlay(title) {
-  for (let i = 0; i < library.length; i++);
-
   let newBookDiv = document.createElement("div");
+  let currentBook = library[library.length - 1];
 
   newBookDiv.innerHTML = `
-  <div class="buch" data-index="${i}">
-  <h3 class="title">${book.title}</h3>
-  <div class="cover">
-  <p class="author">${book.author}</p>
-  <p class="pages">${book.pages}</p>
-  <p class="genre">${book.genre}</p>
-  <p class="price">${book.price}</p>
-  <p class="read-status">${book.read_status ? "Gelesen" : "Nicht gelesen"}</p>
-  `;
-  main.appendChild(newBookDiv);
+      <div class="buch">
+        <h2 class="titleBook">${currentBook.title}</h2>
+        <li class="author">${currentBook.author}</li>
+        <li class="pages">${currentBook.pages}</li>
+        <li class="genre">${currentBook.genre}</li>
+        <li class="price">${currentBook.price}</li>
+        <li class="read_status">${
+          currentBook.read_status ? "Gelesen" : "Nicht gelesen"
+        } </li>
+      </div>
+    `;
+  container.appendChild(newBookDiv);
 }
