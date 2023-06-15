@@ -11,7 +11,7 @@ const author = document.querySelector("#author");
 const pages = document.querySelector("#pages");
 const genre = document.querySelector("#genre");
 const price = document.querySelector("#price");
-const read-status = document.querySelector("#read-status");
+const read_status = document.querySelector("#read_status");
 
 function addBook() {
   plus.addEventListener("click", () => {
@@ -31,37 +31,60 @@ function removeEntry() {
 addBook();
 removeEntry();
 
-/* let library = []; */
+let library = [];
 
-/* function Book(title, author, pages, genre, price,read) {
+function Book(title, author, pages, genre, price, read_status) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.genre = genre;
   this.price = price;
-  this.read-status = read-status;
-} */
+  this.read = read_status;
+}
 
-/* function addBookToLibrary() {
-  const book = new Book(
-    title.value,
-    author.value,
-    parseInt(pages.value),
-    parseInt(price.value),
-    read-status.checked
-  );
-  library.push(book);
-  clearForm();
-} */
+function addBookToLibrary() {
+  btn_senden.addEventListener("click", () => {
+    addEntry.classList.remove("showEntry");
+    overlay.classList.remove("showEntry");
+    btnclose.classList.remove("showEntry");
+    const book = new Book(
+      title.value,
+      author.value,
+      parseInt(pages.value),
+      genre.value,
+      parseInt(price.value),
+      read_status.checked
+    );
+    library.push(book);
+    clearForm();
+    addBookToOverlay(title.value);
+  });
+}
+addBookToLibrary();
 
-/* function clearForm() {
+function clearForm() {
   title.value = "";
   author.value = "";
   pages.value = "";
   genre.value = "";
   price.value = "";
-  read-status.checked = false;
-} */
+  read_status.checked = false;
+}
 
-/* btn_senden.addEventListener("click", addBookToLibrary); */
+function addBookToOverlay(title) {
+  for (let i = 0; i < library.length; i++);
 
+  let newBookDiv = document.createElement("div");
+
+  newBookDiv.innerHTML = `
+  <div class="buch" data-index="${i}">
+  <h3 class="title">${book.title}</h3>
+  <div class="cover">
+  <p class="author">${book.author}</p>
+  <p class="pages">${book.pages}</p>
+  <p class="genre">${book.genre}</p>
+  <p class="price">${book.price}</p>
+  <p class="read-status">${book.read_status ? "Gelesen" : "Nicht gelesen"}</p>
+  `;
+  main.appendChild(newBookDiv);
+}
