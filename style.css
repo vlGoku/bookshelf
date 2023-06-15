@@ -55,14 +55,6 @@
   background-color: rgba(50, 50, 50, 0.5);
 }
 
-.close {
-  display: none;
-  place-self: start start;
-  padding-left: 30px;
-  padding-top: 30px;
-  font-size: 2rem;
-}
-
 .showEntry {
   display: block;
 }

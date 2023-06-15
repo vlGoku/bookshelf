@@ -3,22 +3,21 @@
 const plus = document.querySelector(".plus");
 const addEntry = document.querySelector(".addEntry");
 const overlay = document.querySelector(".overlay");
-const close = document.querySelector(".close");
+const cancelOverlay = document.querySelector(".btn_cancel");
 
 function addBook() {
   plus.addEventListener("click", () => {
     addEntry.classList.add("showEntry");
     overlay.classList.add("showEntry");
-    close.classList.add("showEntry");
   });
 }
 
-function removeEntry() {
-  close.addEventListener("click", () => {
-    addEntry.classList.toggle("showEntry");
-    overlay.classList.toggle("showEntry");
-    close.classList.toggle("showEntry");
+function cancelOverlay() {
+  cancelOverlay.addEventListener("click", () => {
+    addEntry.classList.toggle("hidden");
+    overlay.classList.toggle("hidden");
   });
 }
+
 addBook();
-removeEntry();
+cancelOverlay();
