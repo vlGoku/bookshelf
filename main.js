@@ -100,14 +100,17 @@ function clearForm() {
 function addBookToOverlay(title) {
   container.innerHTML = "";
   library.forEach((currentBook, i) => {
+    const red = Math.floor(Math.random() * 255 + 150);
+    const green = Math.floor(Math.random() * 255 + 150);
+    const blue = Math.floor(Math.random() * 255 + 150);
     let newBookDiv = document.createElement("div");
     newBookDiv.innerHTML = `
-      <div class="buch">
+      <div class="buch" style="background-color: rgb(${red}, ${green},${blue})")>
         <h2 class="titleBook">${currentBook.title}</h2>
         <li class="author">${currentBook.author}</li>
         <li class="pages">${currentBook.pages}</li>
         <li class="genre">${currentBook.genre}</li>
-        <li class="price">${currentBook.price}</li>
+        <li class="price">${currentBook.price}€</li>
         <li class="read_status">${
           currentBook.read ? "Gelesen" : "Nicht gelesen"
         }</li>
@@ -116,6 +119,7 @@ function addBookToOverlay(title) {
        </div>
     `;
     container.appendChild(newBookDiv);
+    newBookDiv.classList.add("animate-book");
   });
 }
 
@@ -128,7 +132,7 @@ const addEventBook = (rootElement) => {
         targetElement = targetElement.parentElement;
       }
       if (targetElement.matches(".change-book")) {
-        let btnElement = document.querySelector(".change-book");
+        let btnElement = targetElement;
         let element = btnElement.parentElement.parentElement.childNodes[11];
         changeBook(element);
       }
