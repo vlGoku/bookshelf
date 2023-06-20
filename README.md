@@ -62,3 +62,5 @@ const addEventBook = (rootElement) => {
   );
 };
 ```
+
+function init() starts all the other functions
