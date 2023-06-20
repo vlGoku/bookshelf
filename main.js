@@ -1,11 +1,5 @@
 "use strict";
 
-const plus = document.querySelector(".plus");
-const addEntry = document.querySelector(".addEntry");
-const overlay = document.querySelector(".overlay");
-const btnclose = document.querySelector(".btn_cancel");
-const btn_senden = document.querySelector(".btn_senden");
-
 const title = document.querySelector("#title");
 const author = document.querySelector("#author");
 const pages = document.querySelector("#pages");
@@ -14,7 +8,12 @@ const price = document.querySelector("#price");
 const readStatus = document.querySelector("#read_status");
 const container = document.querySelector(".container");
 
+const addEntry = document.querySelector(".addEntry");
+const overlay = document.querySelector(".overlay");
+const btnclose = document.querySelector(".btn_cancel");
+
 function addBook() {
+  const plus = document.querySelector(".plus");
   plus.addEventListener("click", () => {
     addEntry.classList.add("showEntry");
     overlay.classList.add("showEntry");
@@ -44,9 +43,6 @@ function changeBook(element) {
   }
 }
 
-addBook();
-removeEntry();
-
 let library = [];
 
 function Book(title, author, pages, genre, price, readStatus) {
@@ -59,16 +55,21 @@ function Book(title, author, pages, genre, price, readStatus) {
 }
 
 function addBookToLibrary() {
+  const btn_senden = document.querySelector(".btn_senden");
+  const alertDiv = document.querySelector(".alertDiv");
   btn_senden.addEventListener("click", () => {
     addEntry.classList.remove("showEntry");
     overlay.classList.remove("showEntry");
     btnclose.classList.remove("showEntry");
+
     if (
-      title.value !== "" &&
-      author.value !== "" &&
-      pages.value !== "" &&
-      genre.value !== "" &&
-      price.value !== ""
+      title.value.length !== 0 &&
+      author.value.length !== 0 &&
+      pages.value.length !== 0 &&
+      genre.value.length !== 0 &&
+      price.value.length !== 0 &&
+      isNaN(price.value) == false &&
+      isNaN(pages.value) == false
     ) {
       const book = new Book(
         title.value,
@@ -81,12 +82,15 @@ function addBookToLibrary() {
       library.push(book);
       clearForm();
       addBookToOverlay(title.value);
+      alertDiv.innerHTML = "";
+    } else if (isNaN(price.value) == true || isNaN(pages.value) == true) {
+      alertDiv.innerHTML =
+        "Bitte geben Sie für Preis und Seitenanzahl eine Zahl an";
     } else {
-      alertDiv.innerHTML = `<div>Bitte füllen Sie alle Felder aus!</div>`;
+      alertDiv.innerHTML = "Bitte füllen Sie alle Felder aus!";
     }
   });
 }
-addBookToLibrary();
 
 function clearForm() {
   title.value = "";
@@ -97,7 +101,7 @@ function clearForm() {
   readStatus.checked = false;
 }
 
-function addBookToOverlay(title) {
+function addBookToOverlay() {
   container.innerHTML = "";
   library.forEach((currentBook, i) => {
     const red = Math.floor(Math.random() * 255 + 150);
@@ -140,4 +144,10 @@ const addEventBook = (rootElement) => {
     true
   );
 };
-addEventBook(container, "click");
+function init() {
+  addBook();
+  removeEntry();
+  addBookToLibrary();
+  addEventBook(container, "click");
+}
+init();

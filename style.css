@@ -37,7 +37,7 @@
 .addEntry {
   display: none;
   position: absolute;
-  height: 400px;
+  height: 450px;
   width: 300px;
   border-radius: 20px;
   border: 2px solid black;
@@ -60,12 +60,12 @@
 
 .addEntry .btn_senden {
   float: left;
-  margin-top: 30px;
+  margin-top: 20px;
 }
 
 .addEntry .btn_cancel {
   float: left;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 40px;
 }
 
